@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjudge", "src\libjudge\libjudge.vcxproj", "{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF} = {A3A9036C-AFA5-405D-81D7-FBB0233466DF}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A5DADD80-8B1C-432E-AE6F-ED72F269B4AB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "module_test", "src\tests\module_test\module_test.vcxproj", "{4A3F85C1-E5E0-4CB3-A145-0EF62FCC25FD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "filebuf_test", "src\tests\filebuf_test\filebuf_test.vcxproj", "{6AE03E49-B7DD-449A-87A9-92F8D961FD98}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF} = {A3A9036C-AFA5-405D-81D7-FBB0233466DF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aplusb", "src\tests\aplusb\aplusb.vcxproj", "{2172816F-6FFE-4168-99E1-B6B1D172700B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02} = {7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF} = {A3A9036C-AFA5-405D-81D7-FBB0233466DF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjudgefs", "src\libjudgefs\libjudgefs.vcxproj", "{A3A9036C-AFA5-405D-81D7-FBB0233466DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{037E479D-7FE7-4EFB-A97D-1B3B5B7AE4AF} = {037E479D-7FE7-4EFB-A97D-1B3B5B7AE4AF}
+		{B345B7F4-9076-4E5A-A811-1877D1CE1EDE} = {B345B7F4-9076-4E5A-A811-1877D1CE1EDE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libzip", "3pty\libzip\libzip.vcxproj", "{B345B7F4-9076-4E5A-A811-1877D1CE1EDE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "3pty\zlib\zlib.vcxproj", "{037E479D-7FE7-4EFB-A97D-1B3B5B7AE4AF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjudge.net", "src\libjudge.net\libjudge.net.vcxproj", "{3E8A5056-583F-407C-B40C-12764701AE4A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02} = {7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF} = {A3A9036C-AFA5-405D-81D7-FBB0233466DF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jb", "src\jb\jb.vcxproj", "{CC8B2C4E-B766-4BF0-89BB-6D65E62A651F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02} = {7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF} = {A3A9036C-AFA5-405D-81D7-FBB0233466DF}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}.Debug|Win32.Build.0 = Debug|Win32
+		{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}.Release|Win32.ActiveCfg = Release|Win32
+		{7FF8C859-4F74-41B1-9F57-9CCAA9FF1F02}.Release|Win32.Build.0 = Release|Win32
+		{4A3F85C1-E5E0-4CB3-A145-0EF62FCC25FD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4A3F85C1-E5E0-4CB3-A145-0EF62FCC25FD}.Release|Win32.ActiveCfg = Release|Win32
+		{6AE03E49-B7DD-449A-87A9-92F8D961FD98}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6AE03E49-B7DD-449A-87A9-92F8D961FD98}.Release|Win32.ActiveCfg = Release|Win32
+		{2172816F-6FFE-4168-99E1-B6B1D172700B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2172816F-6FFE-4168-99E1-B6B1D172700B}.Debug|Win32.Build.0 = Debug|Win32
+		{2172816F-6FFE-4168-99E1-B6B1D172700B}.Release|Win32.ActiveCfg = Release|Win32
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF}.Debug|Win32.Build.0 = Debug|Win32
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF}.Release|Win32.ActiveCfg = Release|Win32
+		{A3A9036C-AFA5-405D-81D7-FBB0233466DF}.Release|Win32.Build.0 = Release|Win32
+		{B345B7F4-9076-4E5A-A811-1877D1CE1EDE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B345B7F4-9076-4E5A-A811-1877D1CE1EDE}.Debug|Win32.Build.0 = Debug|Win32
+		{B345B7F4-9076-4E5A-A811-1877D1CE1EDE}.Release|Win32.ActiveCfg = Release|Win32
+		{B345B7F4-9076-4E5A-A811-1877D1CE1EDE}.Release|Win32.Build.0 = Release|Win32
+		{037E479D-7FE7-4EFB-A97D-1B3B5B7AE4AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{037E479D-7FE7-4EFB-A97D-1B3B5B7AE4AF}.Debug|Win32.Build.0 = Debug|Win32
+		{037E479D-7FE7-4EFB-A97D-1B3B5B7AE4AF}.Release|Win32.ActiveCfg = Release|Win32
+		{037E479D-7FE7-4EFB-A97D-1B3B5B7AE4AF}.Release|Win32.Build.0 = Release|Win32
+		{3E8A5056-583F-407C-B40C-12764701AE4A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E8A5056-583F-407C-B40C-12764701AE4A}.Debug|Win32.Build.0 = Debug|Win32
+		{3E8A5056-583F-407C-B40C-12764701AE4A}.Release|Win32.ActiveCfg = Release|Win32
+		{CC8B2C4E-B766-4BF0-89BB-6D65E62A651F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CC8B2C4E-B766-4BF0-89BB-6D65E62A651F}.Debug|Win32.Build.0 = Debug|Win32
+		{CC8B2C4E-B766-4BF0-89BB-6D65E62A651F}.Release|Win32.ActiveCfg = Release|Win32
+		{CC8B2C4E-B766-4BF0-89BB-6D65E62A651F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4A3F85C1-E5E0-4CB3-A145-0EF62FCC25FD} = {A5DADD80-8B1C-432E-AE6F-ED72F269B4AB}
+		{6AE03E49-B7DD-449A-87A9-92F8D961FD98} = {A5DADD80-8B1C-432E-AE6F-ED72F269B4AB}
+		{2172816F-6FFE-4168-99E1-B6B1D172700B} = {A5DADD80-8B1C-432E-AE6F-ED72F269B4AB}
+	EndGlobalSection
+EndGlobal

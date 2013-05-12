@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Pool.cpp" />
+    <ClCompile Include="Compiler.cpp" />
+    <ClCompile Include="JudgeException.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Fs.cpp" />
+    <ClCompile Include="RamFs.cpp" />
+    <ClCompile Include="ZipFs.cpp" />
+    <ClCompile Include="JudgeLimit.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pool.h" />
+    <ClInclude Include="Compiler.h" />
+    <ClInclude Include="JudgeLimit.h" />
+    <ClInclude Include="JudgeException.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="Fs.h" />
+    <ClInclude Include="StepResult.h" />
+    <ClInclude Include="RamFs.h" />
+    <ClInclude Include="ZipFs.h" />
+  </ItemGroup>
+</Project>

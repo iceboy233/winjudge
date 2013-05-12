@@ -1,0 +1,10 @@
+LIBRARY judgefs
+EXPORTS
+	judgefs_alloc
+	judgefs_free
+	judgefs_add_ref
+	judgefs_release
+	ramfs_create
+	ramfs_set
+	ramfs_set_n
+	zipfs_create

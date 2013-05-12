@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="compiler.hpp">
+      <Filter>top-layer</Filter>
+    </ClInclude>
+    <ClInclude Include="testcase.hpp">
+      <Filter>top-layer</Filter>
+    </ClInclude>
+    <ClInclude Include="pool.hpp">
+      <Filter>top-layer</Filter>
+    </ClInclude>
+    <ClInclude Include="test.hpp">
+      <Filter>top-layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\judge.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\misc.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="env.hpp">
+      <Filter>top-layer</Filter>
+    </ClInclude>
+    <ClInclude Include="process.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="job_object.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_object.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="process_monitor.hpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="watchdog.hpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="temp_dir.hpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="timer_queue.hpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="thread_pool.hpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="thread_suspension.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="os_filebuf.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="bunny.hpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="fs_filebuf.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="exception.hpp">
+      <Filter>bottom-layer\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="user_object.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="logon_session.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="window_station.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="desktop.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="random_string.hpp">
+      <Filter>bottom-layer\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\judgefs.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="onullstream.hpp">
+      <Filter>bottom-layer\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="proc_thread_attribute_list.hpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="util.hpp">
+      <Filter>bottom-layer\utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="top-layer">
+      <UniqueIdentifier>{a91aa10f-6f5c-45dd-964b-7b7e39bcb0b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bottom-layer">
+      <UniqueIdentifier>{23a6f47f-010f-48a7-a890-b5562f3a20f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface">
+      <UniqueIdentifier>{354fdf99-1821-418d-b24b-1a88fbed770a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bottom-layer\infrastructure">
+      <UniqueIdentifier>{e940d026-603d-4f21-a897-c45ddac1f4ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bottom-layer\wrapper">
+      <UniqueIdentifier>{3e7d41ce-8ddb-46eb-842d-1cc9295f51f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bottom-layer\utilities">
+      <UniqueIdentifier>{c5bcec49-84f5-4d87-8bb0-328ca97113d7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="judge.cpp">
+      <Filter>interface</Filter>
+    </ClCompile>
+    <ClCompile Include="pool.cpp">
+      <Filter>top-layer</Filter>
+    </ClCompile>
+    <ClCompile Include="env.cpp">
+      <Filter>top-layer</Filter>
+    </ClCompile>
+    <ClCompile Include="compiler.cpp">
+      <Filter>top-layer</Filter>
+    </ClCompile>
+    <ClCompile Include="process.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="thread_suspension.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="job_object.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_object.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="process_monitor.cpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="watchdog.cpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="temp_dir.cpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="thread_pool.cpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="timer_queue.cpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="os_filebuf.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="bunny.cpp">
+      <Filter>bottom-layer\infrastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="fs_filebuf.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>top-layer</Filter>
+    </ClCompile>
+    <ClCompile Include="testcase.cpp">
+      <Filter>top-layer</Filter>
+    </ClCompile>
+    <ClCompile Include="exception.cpp">
+      <Filter>bottom-layer\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="logon_session.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="user_object.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="window_station.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="desktop.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="random_string.cpp">
+      <Filter>bottom-layer\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="proc_thread_attribute_list.cpp">
+      <Filter>bottom-layer\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="util.cpp">
+      <Filter>bottom-layer\utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="judge.def" />
+  </ItemGroup>
+</Project>

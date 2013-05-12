@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\libjudge\module.cpp" />
+    <ClCompile Include="..\..\libjudge\process.cpp" />
+    <ClCompile Include="..\..\libjudge\process_monitor.cpp" />
+    <ClCompile Include="..\..\libjudge\timer_queue.cpp" />
+    <ClCompile Include="..\..\libjudge\watchdog.cpp" />
+    <ClCompile Include="..\..\libjudge\thread_pool.cpp" />
+    <ClCompile Include="..\..\libjudge\debug_object.cpp" />
+    <ClCompile Include="..\..\libjudge\exception.cpp" />
+    <ClCompile Include="..\..\libjudge\job_object.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\libjudge\module.hpp" />
+    <ClInclude Include="..\..\libjudge\process.hpp" />
+    <ClInclude Include="..\..\libjudge\process_monitor.hpp" />
+    <ClInclude Include="..\..\libjudge\timer_queue.hpp" />
+    <ClInclude Include="..\..\libjudge\watchdog.hpp" />
+    <ClInclude Include="..\..\libjudge\thread_pool.hpp" />
+    <ClInclude Include="..\..\libjudge\debug_object.hpp" />
+    <ClInclude Include="..\..\libjudge\exception.hpp" />
+    <ClInclude Include="..\..\libjudge\job_object.hpp" />
+  </ItemGroup>
+</Project>

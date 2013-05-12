@@ -1,0 +1,14 @@
+LIBRARY judge
+EXPORTS
+	judge_create_pool
+	judge_destroy_pool
+	judge_add_env
+	judge_add_env_unsafe
+	judge_create_compiler
+	judge_destroy_compiler
+	judge_create_test
+	judge_destroy_test
+	judge_add_testcase
+	judge_add_testcase_spj
+	judge_step_test
+	judge_rundown_system
