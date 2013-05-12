@@ -1,11 +1,18 @@
+#ifndef _UTIL_HPP
+#define _UTIL_HPP
+
 #include <cstddef>
 #include <cstdint>
 #include <istream>
 #include <ostream>
+#include <windows.h>
 
 namespace judge {
 namespace util {
 
+typedef std::shared_ptr<std::remove_pointer<HANDLE>::type> safe_handle_t;
+
+safe_handle_t make_safe_handle(HANDLE object);
 std::uint32_t get_processor_count();
 std::uint64_t get_tick_count();
 std::uint64_t get_idle_time();
@@ -46,3 +53,5 @@ bool stream_copy_n(std::istream &in, std::ostream &out, std::size_t max_size)
 
 }
 }
+
+#endif

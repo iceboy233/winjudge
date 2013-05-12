@@ -25,6 +25,11 @@ spin_mutex tick_count_mutex_;
 namespace judge {
 namespace util {
 
+safe_handle_t make_safe_handle(HANDLE object)
+{
+	return safe_handle_t(object, ::CloseHandle);
+}
+
 uint32_t get_processor_count()
 {
 	SYSTEM_INFO system_info;

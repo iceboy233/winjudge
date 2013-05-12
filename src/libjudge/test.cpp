@@ -59,21 +59,21 @@ void test::step()
 		phase_ = JUDGE_PHASE_COMPILE;
 		index_ = 0;
 		compiler_result_ = compiler_->compile(*pool_, source_fs_, source_path_);
-		last_result_.reset(new judge_result);
+		last_result_ = judge_result();
 		if (compiler_result_->flag == JUDGE_ACCEPTED) {
 			if (compiler_result_->exit_code == 0) {
-				last_result_->flag = JUDGE_ACCEPTED;
+				last_result_.flag = JUDGE_ACCEPTED;
 			} else {
-				last_result_->flag = JUDGE_COMPILE_ERROR;
+				last_result_.flag = JUDGE_COMPILE_ERROR;
 			}
 		} else {
-			last_result_->flag = compiler_result_->flag;
+			last_result_.flag = compiler_result_->flag;
 		}
-		last_result_->time_usage_ms = compiler_result_->time_usage_ms;
-		last_result_->memory_usage_kb = compiler_result_->memory_usage_kb;
-		last_result_->runtime_error = compiler_result_->runtime_error;
-		last_result_->judge_output = compiler_result_->std_output.c_str();
-		last_result_->user_output = nullptr;
+		last_result_.time_usage_ms = compiler_result_->time_usage_ms;
+		last_result_.memory_usage_kb = compiler_result_->memory_usage_kb;
+		last_result_.runtime_error = compiler_result_->runtime_error;
+		last_result_.judge_output = compiler_result_->std_output.c_str();
+		last_result_.user_output = nullptr;
 		last_context_.reset();
 		return;
 
@@ -89,7 +89,7 @@ void test::step()
 	default:
 		phase_ = JUDGE_PHASE_NO_MORE;
 		index_ = 0;
-		last_result_.reset();
+		last_result_ = judge_result();
 		last_context_.reset();
 		return;
 	}
@@ -102,7 +102,7 @@ void test::step()
 	} else if (!contexts_.empty()) {
 		if (index_ == 0) {
 			for_each(contexts_.begin(), contexts_.end(),
-				[&](shared_ptr<context> ctx)->void
+				[&](const shared_ptr<context> &ctx)->void
 			{
 				vector<shared_ptr<env> > envs;
 				pool_->take_env(back_inserter(envs), 1);
@@ -120,16 +120,16 @@ void test::step()
 		if (::WaitForSingleObject(last_context_->event.get(), INFINITE) == WAIT_FAILED) {
 			throw win32_exception(::GetLastError());
 		}
-		last_result_.reset(new judge_result(last_context_->result));
-		summary_result_.flag = max(summary_result_.flag, last_result_->flag);
-		summary_result_.time_usage_ms += last_result_->time_usage_ms;
-		summary_result_.memory_usage_kb = max(summary_result_.memory_usage_kb, last_result_->memory_usage_kb);
+		last_result_ = last_context_->result;
+		summary_result_.flag = max(summary_result_.flag, last_result_.flag);
+		summary_result_.time_usage_ms += last_result_.time_usage_ms;
+		summary_result_.memory_usage_kb = max(summary_result_.memory_usage_kb, last_result_.memory_usage_kb);
 		return;
 	}
 
 	phase_ = JUDGE_PHASE_SUMMARY;
 	index_ = 0;
-	last_result_.reset(new judge_result(summary_result_));
+	last_result_ = summary_result_;
 	last_context_.reset();
 }
 
@@ -145,7 +145,7 @@ uint32_t test::index()
 
 const judge_result &test::last_result()
 {
-	return *last_result_;
+	return last_result_;
 }
 
 }

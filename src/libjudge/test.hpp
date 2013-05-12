@@ -45,9 +45,9 @@ private:
 	std::deque<std::shared_ptr<context> > contexts_;
 	std::uint32_t phase_;
 	std::uint32_t index_;
-	std::shared_ptr<judge_result> last_result_;
 	std::shared_ptr<context> last_context_;
 	std::shared_ptr<compiler::result> compiler_result_;
+	judge_result last_result_;
 	judge_result summary_result_;
 };
 

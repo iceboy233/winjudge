@@ -11,14 +11,18 @@
 #include "debug_object.hpp"
 #include "process.hpp"
 #include "job_object.hpp"
+#include "util.hpp"
 
 namespace judge {
 
 class process_monitor {
 public:
 	struct result {
+		result();
+
 		std::int32_t exit_status;
-		std::shared_ptr<EXCEPTION_RECORD> exception;
+		bool has_exception;
+		EXCEPTION_RECORD exception;
 	};
 
 private:
@@ -29,12 +33,11 @@ private:
 		virtual ~context_base() {}
 		virtual void invoke() = 0;
 		void set_exit_status(std::int32_t exit_status);
-		void set_exception(const std::shared_ptr<EXCEPTION_RECORD> &exception);
-		const std::shared_ptr<judge::process> &process();
-		const std::shared_ptr<judge::job_object> &job_object();
-		void add_thread(uint32_t thread_id,
-			std::shared_ptr<std::remove_pointer<HANDLE>::type> thread_handle);
-		std::shared_ptr<std::remove_pointer<HANDLE>::type> get_thread(uint32_t thread_id);
+		void set_exception(const EXCEPTION_RECORD &exception);
+		judge::process &process();
+		judge::job_object &job_object();
+		void add_thread(uint32_t thread_id, util::safe_handle_t thread_handle);
+		util::safe_handle_t get_thread(uint32_t thread_id);
 		void set_breakpoint_at_entry(void *base);
 		bool on_breakpoint(void *address);
 	protected:
@@ -44,8 +47,7 @@ private:
 		std::shared_ptr<judge::job_object> job_;
 		void *entry_point_;
 		BYTE stolen_byte_;
-		std::unordered_map<uint32_t,
-			std::shared_ptr<std::remove_pointer<HANDLE>::type> > threads_;
+		std::unordered_map<uint32_t, util::safe_handle_t> threads_;
 	};
 
 	template <typename T>

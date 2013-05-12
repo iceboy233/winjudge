@@ -35,8 +35,7 @@ shared_ptr<process_monitor::context_base> process_monitor::debugger::_lookup_con
 
 NTSTATUS process_monitor::debugger::on_create_process(PDBGUI_WAIT_STATE_CHANGE state_change)
 {
-	auto thread = shared_ptr<remove_pointer<HANDLE>::type>(
-		state_change->StateInfo.CreateProcessInfo.HandleToThread, ::CloseHandle);
+	auto thread = util::make_safe_handle(state_change->StateInfo.CreateProcessInfo.HandleToThread);
 	state_change->StateInfo.CreateProcessInfo.HandleToThread = NULL;
 	DBGKM_CREATE_PROCESS &new_process = state_change->StateInfo.CreateProcessInfo.NewProcess;
 	shared_ptr<context_base> context = _lookup_context(reinterpret_cast<uint32_t>(
@@ -51,8 +50,7 @@ NTSTATUS process_monitor::debugger::on_create_process(PDBGUI_WAIT_STATE_CHANGE s
 
 NTSTATUS process_monitor::debugger::on_create_thread(PDBGUI_WAIT_STATE_CHANGE state_change)
 {
-	auto thread = shared_ptr<remove_pointer<HANDLE>::type>(
-		state_change->StateInfo.CreateThread.HandleToThread, ::CloseHandle);
+	auto thread = util::make_safe_handle(state_change->StateInfo.CreateThread.HandleToThread);
 	state_change->StateInfo.CreateThread.HandleToThread = NULL;
 	shared_ptr<context_base> context = _lookup_context(reinterpret_cast<uint32_t>(
 		state_change->AppClientId.UniqueProcess));
@@ -86,9 +84,9 @@ NTSTATUS process_monitor::debugger::on_exception(PDBGUI_WAIT_STATE_CHANGE state_
 	}
 
 	if (!state_change->StateInfo.Exception.FirstChance) {
-		context->set_exception(shared_ptr<EXCEPTION_RECORD>(new EXCEPTION_RECORD(record)));
+		context->set_exception(record);
 		try {
-			context->job_object()->terminate(static_cast<int32_t>(record.ExceptionCode));
+			context->job_object().terminate(static_cast<int32_t>(record.ExceptionCode));
 		} catch (const win32_exception &) {
 		}
 		return DBG_EXCEPTION_HANDLED;
@@ -100,7 +98,7 @@ NTSTATUS process_monitor::debugger::on_exception(PDBGUI_WAIT_STATE_CHANGE state_
 			::GetThreadContext(thread.get(), &thread_context);
 			thread_context.Eip = reinterpret_cast<DWORD>(record.ExceptionAddress);
 			::SetThreadContext(thread.get(), &thread_context);
-			context->process()->start_timer();
+			context->process().start_timer();
 			return DBG_EXCEPTION_HANDLED;
 		}
 		return DBG_EXCEPTION_HANDLED;
@@ -108,6 +106,10 @@ NTSTATUS process_monitor::debugger::on_exception(PDBGUI_WAIT_STATE_CHANGE state_
 		return DBG_EXCEPTION_NOT_HANDLED;
 	}
 }
+
+process_monitor::result::result()
+	: exit_status(0), has_exception(false), exception()
+{}
 
 process_monitor::context_base::context_base(const std::shared_ptr<judge::process> &ps,
 	const std::shared_ptr<judge::job_object> &job)
@@ -119,28 +121,29 @@ void process_monitor::context_base::set_exit_status(int32_t exit_status)
 	result_.exit_status = exit_status;
 }
 
-void process_monitor::context_base::set_exception(const shared_ptr<EXCEPTION_RECORD> &exception)
+void process_monitor::context_base::set_exception(const EXCEPTION_RECORD &exception)
 {
+	result_.has_exception = true;
 	result_.exception = exception;
 }
 
-const shared_ptr<judge::process> &process_monitor::context_base::process()
+judge::process &process_monitor::context_base::process()
 {
-	return ps_;
+	return *ps_;
 }
 
-const shared_ptr<judge::job_object> &process_monitor::context_base::job_object()
+judge::job_object &process_monitor::context_base::job_object()
 {
-	return job_;
+	return *job_;
 }
 
 void process_monitor::context_base::add_thread(uint32_t thread_id,
-	shared_ptr<remove_pointer<HANDLE>::type> thread_handle)
+	util::safe_handle_t thread_handle)
 {
 	threads_.insert(make_pair(thread_id, thread_handle));
 }
 
-shared_ptr<remove_pointer<HANDLE>::type> process_monitor::context_base::get_thread(
+util::safe_handle_t process_monitor::context_base::get_thread(
 	uint32_t thread_id)
 {
 	auto iter = threads_.find(thread_id);

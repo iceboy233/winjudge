@@ -101,7 +101,9 @@ void bunny::_tune_job_object()
 			limits.BasicLimitInformation.ActiveProcessLimit = static_cast<DWORD>(limit_.active_process_limit);
 			limits.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_ACTIVE_PROCESS;
 		}
-		limits.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
+		limits.BasicLimitInformation.LimitFlags
+			|= JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION
+			| JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
 		limits.commit();
 	}
 	{
@@ -204,11 +206,11 @@ bunny::result bunny::wait()
 		result.flag = max(result.flag, JUDGE_MEMORY_LIMIT_EXCEEDED);
 	} else if (limit_.time_limit_ms && result.time_usage_ms > limit_.time_limit_ms) {
 		result.flag = max(result.flag, JUDGE_TIME_LIMIT_EXCEEDED);
-	} else if (context_->result.exception) {
+	} else if (context_->result.has_exception) {
 		result.flag = max(result.flag, JUDGE_RUNTIME_ERROR);
-		switch (context_->result.exception->ExceptionCode) {
+		switch (context_->result.exception.ExceptionCode) {
 		case EXCEPTION_ACCESS_VIOLATION:
-			switch (context_->result.exception->ExceptionInformation[0]) {
+			switch (context_->result.exception.ExceptionInformation[0]) {
 			case 0:
 				result.runtime_error = RUNTIME_READ_ACCESS_VIOLATION;
 				break;

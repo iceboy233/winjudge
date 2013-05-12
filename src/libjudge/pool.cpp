@@ -15,7 +15,7 @@ using winstl::path_a;
 
 namespace judge {
 
-void pool::set_temp_dir(const std::shared_ptr<temp_dir> &temp_dir)
+void pool::set_temp_dir(const shared_ptr<temp_dir> &temp_dir)
 {
 	temp_dir_ = temp_dir;
 }
