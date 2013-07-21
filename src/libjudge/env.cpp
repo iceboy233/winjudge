@@ -280,6 +280,7 @@ pair<shared_ptr<process>, shared_ptr<thread_suspension> > restricted_env::create
 
 		STARTUPINFOEXA info = {0};
 		info.StartupInfo.cb = sizeof(info);
+		info.StartupInfo.lpDesktop = const_cast<LPSTR>(desktop_name.c_str());
 		info.StartupInfo.dwFlags = STARTF_FORCEOFFFEEDBACK | STARTF_USESTDHANDLES;
 		info.StartupInfo.hStdInput = stdin_handle;
 		info.StartupInfo.hStdOutput = stdout_handle;
