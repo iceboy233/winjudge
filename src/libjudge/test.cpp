@@ -10,6 +10,7 @@
 #include "testcase.hpp"
 #include "pool.hpp"
 #include "compiler.hpp"
+#include "util.hpp"
 
 using namespace std;
 using winstl::event;
@@ -19,12 +20,14 @@ namespace judge {
 struct test::context {
 	explicit context(const std::shared_ptr<testcase> &testcase)
 		: event(true, false)
+		, status(JSTATUS_SUCCESS)
 		, testcase(testcase)
 		, result()
 	{}
 
 	winstl::event event;
 	std::shared_ptr<testcase> testcase;
+	jstatus_t status;
 	judge_result result;
 };
 
@@ -109,7 +112,13 @@ void test::step()
 				shared_ptr<env> env = move(envs.front());
 				shared_ptr<compiler::result> cr = compiler_result_;
 				pool_->thread_pool().queue([env, ctx, cr]()->void {
-					ctx->result = ctx->testcase->run(*env, *cr);
+					auto &env0 = env;
+					auto &ctx0 = ctx;
+					auto &cr0 = cr;
+					ctx->status = util::wrap([&env0, &ctx0, &cr0]()->jstatus_t {
+						ctx0->result = ctx0->testcase->run(*env0, *cr0);
+						return JSTATUS_SUCCESS;
+					});
 					ctx->event.set();
 				});
 			});
@@ -119,6 +128,9 @@ void test::step()
 		contexts_.pop_front();
 		if (::WaitForSingleObject(last_context_->event.get(), INFINITE) == WAIT_FAILED) {
 			throw win32_exception(::GetLastError());
+		}
+		if (!JSUCCESS(last_context_->status)) {
+			throw judge_exception(last_context_->status);
 		}
 		last_result_ = last_context_->result;
 		summary_result_.flag = max(summary_result_.flag, last_result_.flag);

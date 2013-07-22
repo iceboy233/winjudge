@@ -1,5 +1,4 @@
 #include <memory>
-#include <stdexcept>
 #include <cassert>
 #include <winstl/filesystem/path.hpp>
 #include <judge.h>
@@ -9,27 +8,13 @@
 #include "compiler.hpp"
 #include "test.hpp"
 #include "testcase.hpp"
-#include "exception.hpp"
+#include "util.hpp"
 
 using namespace std;
 using namespace judge;
 using winstl::path_a;
 
 namespace {
-
-template <typename T>
-jstatus_t wrap(T func)
-{
-	try {
-		return func();
-	} catch (const bad_alloc &) {
-		return JSTATUS_BAD_ALLOC;
-	} catch (const judge_exception &ex) {
-		return ex.status();
-	} catch (...) {
-		assert(!"unhandled exception");
-	}
-}
 
 judge_limit sanitize(judge_limit *limit)
 {
@@ -48,7 +33,7 @@ judge_create_pool(
 	/* out */ struct judge_pool **pool,
 	const char *temp_dir)
 {
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::pool> p(new judge::pool);
 		shared_ptr<judge::temp_dir> td(new judge::temp_dir(p, path_a(temp_dir)));
 		p->set_temp_dir(td);
@@ -73,7 +58,7 @@ judge_add_env(
 	const char *username,
 	const char *password)
 {
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::pool> &p(*reinterpret_cast<shared_ptr<judge::pool> *>(pool));
 		std::unique_ptr<judge::env> env(new judge::restricted_env(p, username, password));
 		p->add_env(move(env));
@@ -86,7 +71,7 @@ __stdcall
 judge_add_env_unsafe(
 	struct judge_pool *pool)
 {
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::pool> &p = *reinterpret_cast<shared_ptr<judge::pool> *>(pool);
 		std::unique_ptr<judge::env> env(new judge::env(p));
 		p->add_env(move(env));
@@ -111,7 +96,7 @@ judge_create_compiler(
 		source_filename = target_filename = "tmpfile";
 	}
 
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::compiler> p(
 			new judge::compiler(executable_path, command_line,
 				source_filename, target_filename, sanitize(compiler_limit),
@@ -139,7 +124,7 @@ judge_create_test(
 	struct judgefs *source_fs,
 	const char *source_path)
 {
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::compiler> &c = *reinterpret_cast<shared_ptr<judge::compiler> *>(compiler);
 		shared_ptr<judge::pool> &p(*reinterpret_cast<shared_ptr<judge::pool> *>(pool));
 		shared_ptr<judge::test> t(
@@ -167,7 +152,7 @@ judge_add_testcase(
 	const char *output_path,
 	struct judge_limit *limit)
 {
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::test> &t(*reinterpret_cast<shared_ptr<judge::test> *>(test));
 		shared_ptr<judge::testcase> tc(
 			new judge::testcase_impl(data_fs, input_path, output_path, sanitize(limit)));
@@ -187,7 +172,7 @@ judge_add_testcase_spj(
 	struct judge_limit *limit,
 	struct judge_limit *spj_limit)
 {
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::test> &t(*reinterpret_cast<shared_ptr<judge::test> *>(test));
 		shared_ptr<judge::testcase> tc(
 			new judge::testcase_spj_impl(data_fs, spj_prefix, spj_path_rel, spj_param,
@@ -205,7 +190,7 @@ judge_step_test(
 	/* out */ uint32_t *index,
 	/* out */ const judge_result **result)
 {
-	return wrap([=]()->jstatus_t {
+	return util::wrap([=]()->jstatus_t {
 		shared_ptr<judge::test> &t(*reinterpret_cast<shared_ptr<judge::test> *>(test));
 		t->step();
 		*phase = t->phase();

@@ -5,7 +5,10 @@
 #include <cstdint>
 #include <istream>
 #include <ostream>
+#include <stdexcept>
 #include <windows.h>
+#include <judge.h>
+#include "exception.hpp"
 
 namespace judge {
 namespace util {
@@ -16,6 +19,20 @@ safe_handle_t make_safe_handle(HANDLE object);
 std::uint32_t get_processor_count();
 std::uint64_t get_tick_count();
 std::uint64_t get_idle_time();
+
+template <typename T>
+jstatus_t wrap(T func)
+{
+	try {
+		return func();
+	} catch (const bad_alloc &) {
+		return JSTATUS_BAD_ALLOC;
+	} catch (const judge_exception &ex) {
+		return ex.status();
+	} catch (...) {
+		assert(!"unhandled exception");
+	}
+}
 
 template <std::size_t buffer_size>
 bool stream_copy(std::istream &in, std::ostream &out)
